@@ -3,13 +3,13 @@ use crate::domain::encounters::value_objects::level_range::LevelRange;
 use crate::domain::encounters::value_objects::roll_range::RollRange;
 
 pub struct Encounter {
-    pub environment: &'static str,
-    pub level_range: &'static LevelRange,
-    pub roll_range: &'static RollRange,
+    pub environment: String,
+    pub level_range: LevelRange,
+    pub roll_range: RollRange,
 }
 
 impl Encounter {
-    pub fn new(environment: &str, level_range: &LevelRange, roll_range: &RollRange) -> Self {
+    pub fn new(environment: String, level_range: LevelRange, roll_range: RollRange) -> Self {
         Encounter {
             environment,
             level_range,
@@ -40,12 +40,24 @@ impl BaseEncounter for Encounter {
 
 pub struct SituationalEncounter {
     pub encounter: Encounter,
-    pub situation: str,
+    pub situation: String,
+}
+
+impl SituationalEncounter {
+    pub fn new(encounter: Encounter, situation: String) -> Self {
+        SituationalEncounter { encounter, situation }
+    }
 }
 
 pub struct CombatEncounter {
     pub encounter: Encounter,
     pub enemy_formulas: Vec<EnemyFormula>,
+}
+
+impl CombatEncounter {
+    pub fn new(encounter: Encounter, enemy_formulas: Vec<EnemyFormula>) -> Self {
+        CombatEncounter { encounter, enemy_formulas }
+    }
 }
 
 impl BaseEncounter for SituationalEncounter {

@@ -17,10 +17,22 @@ pub enum GenerateCommands {
 }
 
 #[derive(Subcommand, Debug)]
+pub enum EncounterCommands {
+    Get {
+        #[arg(short, long)]
+        id: i32
+    }
+}
+
+#[derive(Subcommand, Debug)]
 pub enum Commands {
     Generate {
         #[command(subcommand)]
         command: Option<GenerateCommands>
+    },
+    Encounters {
+        #[command(subcommand)]
+        command: Option<EncounterCommands>
     }
 }
 

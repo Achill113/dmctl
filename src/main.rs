@@ -7,6 +7,8 @@ mod application;
 mod infrastructure;
 mod domain;
 mod domain_shared;
+mod schema;
+mod framework;
 
 #[tokio::main]
 async fn main() {
